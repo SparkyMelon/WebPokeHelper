@@ -1,0 +1,389 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Pokemon Data";
+}
+
+@section Scripts
+{
+    <script type="text/javascript" src=@Url.Content("~/js/PokemonDataScript.js")></script>
+    <link rel="stylesheet" type="text/css" href=@Url.Content("~/css/PokemonDataStyle.css")>
+}
+
+<div class="centerWrapper">
+    <div class="dropdown">
+        <input class="form-control dropdown-toggle pokemonDropdown" type="text" id="pokemonListText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <div id="pokemonListDropdown" class="dropdown-menu" aria-labelledby="pokemonListText">
+            @for (int i = 0; i < Model.pokemonList.Count; i++)
+            {
+                <a class="dropdown-item">@Model.pokemonList[i].name</a>
+            }
+        </div>
+    </div>
+</div>
+
+@if (Model.pokemonName != "" && Model.pokemonChosen != null)
+{
+<div class="container border borderDark rounded pokemonContainer">
+    <div class="row pokemonDataSpacing">
+        <div class="col-4">
+            <h1><b>@Model.pokemonChosen.name</b></h1>
+        </div>
+        <div class="col-4 centerWrapper">
+            @foreach (Models.Type type in Model.pokemonChosen.types)
+            {
+                <img class="pokemonTypeImg" src="~/Pokemon Icons/@(type.name).png" />
+            }
+        </div>
+        <div class="col-3">
+
+        </div>
+        <div class="col-1 centerWrapper">
+            <img class="pokemonCaret caret" src="~/Favicon/caret-bottom.svg">
+        </div>
+    </div>
+
+    <div id="pokemonDetailsContainer">
+        <!--Stats-->
+        <div class="container border borderDark rounded">
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-10 centerWrapper">
+                    <h3><b>Stats</b></h3>
+                </div>
+                <div class="col-1 centerWrapper">
+                    <img class="pokemonStatsCaret caretSm" src="~/Favicon/caret-bottom.svg">
+                </div>
+            </div>
+            <div class="row tableWrapperFix17">
+                <div class="col-12 border borderDark borderFix statTableSizing centerWrapper paddingTopBot1"><h6><em>Level 50 w/ EV, IV and nature</em></h6></div>
+            </div>
+            <div class="row tableWrapperFix22">
+                <div class="col-2 border borderDark borderFix statTableSizing centerWrapper paddingTopBot1"><h6><b>HP</b></h6></div>
+                <div class="col-2 border borderDark borderFix statTableSizing centerWrapper paddingTopBot1"><h6><b>ATK</b></h6></div>
+                <div class="col-2 border borderDark borderFix statTableSizing centerWrapper paddingTopBot1"><h6><b>DEF</b></h6></div>
+                <div class="col-2 border borderDark borderFix statTableSizing centerWrapper paddingTopBot1"><h6><b>SP.ATK</b></h6></div>
+                <div class="col-2 border borderDark borderFix statTableSizing centerWrapper paddingTopBot1"><h6><b>SP.DEF</b></h6></div>
+                <div class="col-2 border borderDark borderFix statTableSizing centerWrapper paddingTopBot1"><h6><b>SPD</b></h6></div>
+            </div>
+            <div class="row tableWrapperFix22">
+                <div class="col-2 border borderDark borderFix statTableSizing centerWrapper paddingTopBot1"><h6>@Model.pokemonChosen.hp</h6></div>
+                <div class="col-2 border borderDark borderFix statTableSizing centerWrapper paddingTopBot1"><h6>@Model.pokemonChosen.atk</h6></div>
+                <div class="col-2 border borderDark borderFix statTableSizing centerWrapper paddingTopBot1"><h6>@Model.pokemonChosen.def</h6></div>
+                <div class="col-2 border borderDark borderFix statTableSizing centerWrapper paddingTopBot1"><h6>@Model.pokemonChosen.spAtk</h6></div>
+                <div class="col-2 border borderDark borderFix statTableSizing centerWrapper paddingTopBot1"><h6>@Model.pokemonChosen.spDef</h6></div>
+                <div class="col-2 border borderDark borderFix statTableSizing centerWrapper paddingTopBot1"><h6>@Model.pokemonChosen.spd</h6></div>
+            </div>
+            <div class="pokemonDataSpacing"></div>
+        </div>
+        <div class="pokemonDataSpacing"></div>
+        <!--Abilities-->
+        <div class="container border borderDark rounded">
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-10 centerWrapper">
+                    <h3><b>Abilities</b></h3>
+                </div>
+                <div class="col-1 centerWrapper">
+                    <img class="pokemonAbilitiesCaret caretSm" src="~/Favicon/caret-bottom.svg">
+                </div>
+            </div>
+            @foreach (Models.Ability ability in Model.pokemonChosen.abilities)
+            {
+                <div class="row borderWrapperFix">
+                    <div class="col-3 border borderDark borderFix paddingTopBot1">
+                        <h6>@ability.name</h6>
+                    </div>
+                    <div class="col-9 border borderDark borderFix paddingTopBot1">
+                        @ability.description
+                    </div>
+                </div>
+            }
+            <div class="pokemonDataSpacing"></div>
+        </div>
+        <div class="pokemonDataSpacing"></div>
+        <!--Moves-->
+        <div class="movesContainer container border borderDark rounded noPadding">
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-10 centerWrapper">
+                    <h3><b>Moves</b></h3>
+                </div>
+                <div class="col-1 centerWrapper">
+                    <img class="pokemonMovesCaret caretSm" src="~/Favicon/caret-bottom.svg">
+                </div>
+            </div>
+            <div class="row tableWrapperFix23">
+                <div class="col-3 border borderDark borderFix statTableSizing centerWrapper paddingTopBot1"><h6><b>Name</b></h6></div>
+                <div class="col-1 border borderDark borderFix statTableSizing centerWrapper paddingTopBot1"><h6><b>Type</b></h6></div>
+                <div class="col-1 border borderDark borderFix statTableSizing centerWrapper paddingTopBot1"><h6><b>Category</b></h6></div>
+                <div class="col-2 border borderDark borderFix statTableSizing centerWrapper paddingTopBot1"><h6><b>Power Points</b></h6></div>
+                <div class="col-2 border borderDark borderFix statTableSizing centerWrapper paddingTopBot1"><h6><b>Base Power</b></h6></div>
+                <div class="col-2 border borderDark borderFix statTableSizing centerWrapper paddingTopBot1"><h6><b>Accuracy</b></h6></div>
+                <div class="col-1 border borderDark borderFix statTableSizing centerWrapper"></div>
+            </div>
+            <div class="moveContainer">
+                @foreach (Models.Move move in Model.pokemonChosen.moves)
+                {
+                    <div class="moveStuff">
+                        <div class="row tableWrapperFix23">
+                            <div class="col-3 border borderDark borderFix statTableSizing centerWrapper paddingTopBot1">@move.name</div>
+                            <div class="col-1 border borderDark borderFix centerWrapper paddingTopBot1"><img class="pokemonTypeImgXSm" src="~/Pokemon Icons/@(move.type).png" /></div>
+                            <div class="col-1 border borderDark borderFix centerWrapper paddingTopBot1"><img class="pokemonTypeImgXSm" src="~/Pokemon Icons/@(move.category).png" /></div>
+                            <div class="col-2 border borderDark borderFix statTableSizing centerWrapper paddingTopBot1">@move.powerPoints</div>
+                            <div class="col-2 border borderDark borderFix statTableSizing centerWrapper paddingTopBot1">@move.basePower</div>
+                            <div class="col-2 border borderDark borderFix statTableSizing centerWrapper paddingTopBot1">@move.accuracy</div>
+                            <div class="col-1 border borderDark borderFix statTableSizing centerWrapper paddingTopBot1"><img class="pokemonMoveCaret caretSm" src="~/Favicon/caret-bottom.svg"></div>
+                        </div>
+                        <div class="extraMoveInfo">
+                            <div class="row tableWrapperFix19">
+                                <div class="col-4 border borderFix borderTopDark statTableSizing centerWrapper paddingTopBot1"><h6><b>Effect</b></h6></div>
+                                <div class="col-4 border borderFix borderTopDark statTableSizing centerWrapper paddingTopBot1"><h6><b>Secondary Effect</b></h6></div>
+                                <div class="col-4 border borderFix borderTopDark statTableSizing centerWrapper paddingTopBot1"><h6><b>Effect Rate</b></h6></div>
+                            </div>
+                            <div class="row tableWrapperFix19">
+                                <div class="col-4 border borderFix statTableSizing centerWrapper paddingTopBot1">@move.effect</div>
+                                <div class="col-4 border borderFix statTableSizing centerWrapper paddingTopBot1">@move.secondaryEffect</div>
+                                <div class="col-4 border borderFix statTableSizing centerWrapper paddingTopBot1">@move.effectRate%</div>
+                            </div>
+                            <div class="row tableWrapperFix19">
+                                <div class="col-4 border borderFix statTableSizing centerWrapper paddingTopBot1"><h6><b>Base Crit Rate</b></h6></div>
+                                <div class="col-4 border borderFix statTableSizing centerWrapper paddingTopBot1"><h6><b>Speed Priority</b></h6></div>
+                                <div class="col-4 border borderFix statTableSizing centerWrapper paddingTopBot1"><h6><b>Target</b></h6></div>
+                            </div>
+                            <div class="row tableWrapperFix19">
+                                <div class="col-4 border borderFix statTableSizing centerWrapper paddingTopBot1">@move.baseCritRate%</div>
+                                <div class="col-4 border borderFix statTableSizing centerWrapper paddingTopBot1">@move.speedPriority</div>
+                                <div class="col-4 border borderFix statTableSizing centerWrapper paddingTopBot1">@move.target</div>
+                            </div>
+                            <div class="row tableWrapperFix18">
+                                <div class="col-6 border borderFix statTableSizing centerWrapper paddingTopBot1"><h6><b>Max Move</b></h6></div>
+                                <div class="col-6 border borderFix statTableSizing centerWrapper paddingTopBot1"><h6><b>Max Move Power</b></h6></div>
+                            </div>
+                            <div class="row tableWrapperFix18">
+                                <div class="col-6 border borderFix statTableSizing centerWrapper paddingTopBot1">@move.maxMove</div>
+                                <div class="col-6 border borderFix statTableSizing centerWrapper paddingTopBot1">@move.maxMovePower</div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="pokemonDataSpacing"></div>
+        </div>
+    </div>
+    <div class="pokemonDataSpacing"></div>
+</div>
+}
+
+@if (Model.pokemonName != "" && Model.pokemonChosen != null && false)
+{
+    <div class="container">
+        <div class="row pokemonDataSpacing">
+            <div class="col-12 centerWrapper">
+                <h1><b>@Model.pokemonChosen.name</b></h1>
+            </div>
+        </div>
+        <div class="pokemonDataSpacing">
+            <div class="row">
+                <div class="col-6 centerWrapper">
+                    <h3><b>Abilities</b></h3>
+                </div>
+                <div class="col-6 centerWrapper">
+                    <h3><b>Types</b></h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    @foreach (Models.Ability ability in Model.pokemonChosen.abilities)
+                    {
+                        <div class="row centerWrapper">
+                            <em>@ability.name:</em> @ability.description
+                        </div>
+                    }
+                </div>
+                <div class="col-6 centerWrapper">
+                    @foreach (Models.Type type in Model.pokemonChosen.types)
+                    {
+                        <img class="pokemonTypeImg" src="~/Pokemon Icons/@(type.name).png" />
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="pokemonDataSpacing">
+            <div class="row">
+                <div class="col-12 centerWrapper">
+                    <h3><b>Level 50 Stats</b></h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2 centerWrapper">
+                    <em>HP</em>
+                </div>
+                <div class="col-2 centerWrapper">
+                    <em>ATK</em>
+                </div>
+                <div class="col-2 centerWrapper">
+                    <em>DEF</em>
+                </div>
+                <div class="col-2 centerWrapper">
+                    <em>SP. ATK</em>
+                </div>
+                <div class="col-2 centerWrapper">
+                    <em>SP. DEF</em>
+                </div>
+                <div class="col-2 centerWrapper">
+                    <em>SPD</em>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2 centerWrapper">
+                    @Model.pokemonChosen.hp
+                </div>
+                <div class="col-2 centerWrapper">
+                    @Model.pokemonChosen.atk
+                </div>
+                <div class="col-2 centerWrapper">
+                    @Model.pokemonChosen.def
+                </div>
+                <div class="col-2 centerWrapper">
+                    @Model.pokemonChosen.spAtk
+                </div>
+                <div class="col-2 centerWrapper">
+                    @Model.pokemonChosen.spDef
+                </div>
+                <div class="col-2 centerWrapper">
+                    @Model.pokemonChosen.spd
+                </div>
+            </div>
+        </div>
+        <div class="pokemonDataSpacing">
+            <div class="row">
+                <div class="col-12 centerWrapper">
+                    <h3><b>Moves</b></h3>
+                </div>
+            </div>
+            <div class="row">
+                @foreach (Models.Move move in Model.pokemonChosen.moves)
+                {
+                    <div class="container">
+                        <!--First 'row'-->
+                        <div class="row">
+                            <div class="col-4">
+                                <em>Name</em>
+                            </div>
+                            <div class="col-4">
+                                <em>Type</em>
+                            </div>
+                            <div class="col-4">
+                                <em>Category</em>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                @move.name
+                            </div>
+                            <div class="col-4">
+                                <img class="pokemonTypeImgSm" src="~/Pokemon Icons/@(move.type).png" />
+                            </div>
+                            <div class="col-4">
+                                <img class="pokemonTypeImgSm" src="~/Pokemon Icons/@(move.category).png" />
+                            </div>
+                        </div>
+                        <div class="smallSpacing"></div>
+                        <!--Second 'row'-->
+                        <div class="row">
+                            <div class="col-4">
+                                <em>Base Power</em>
+                            </div>
+                            <div class="col-4">
+                                <em>Power Points</em>
+                            </div>
+                            <div class="col-4">
+                                <em>Accuracy</em>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                @move.basePower
+                            </div>
+                            <div class="col-4">
+                                @move.powerPoints
+                            </div>
+                            <div class="col-4">
+                                @move.accuracy
+                            </div>
+                        </div>
+                        <div class="smallSpacing"></div>
+                        <!--Third 'row'-->
+                        <div class="row">
+                            <div class="col-4">
+                                <em>Base Crit Rate</em>
+                            </div>
+                            <div class="col-4">
+                                <em>Speed Priority</em>
+                            </div>
+                            <div class="col-4">
+                                <em>Target</em>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                @move.baseCritRate
+                            </div>
+                            <div class="col-4">
+                                @move.speedPriority
+                            </div>
+                            <div class="col-4">
+                                @move.target
+                            </div>
+                        </div>
+                        <div class="smallSpacing"></div>
+                        <!--Fourth 'row'-->
+                        <div class="row">
+                            <div class="col-4">
+                                <em>Effect</em>
+                            </div>
+                            <div class="col-4">
+                                <em>Secondary Effect</em>
+                            </div>
+                            <div class="col-4">
+                                <em>Effect Rate</em>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                @move.effect
+                            </div>
+                            <div class="col-4">
+                                @move.secondaryEffect
+                            </div>
+                            <div class="col-4">
+                                @move.effectRate
+                            </div>
+                        </div>
+                        <div class="smallSpacing"></div>
+                        <!--Fourth 'row'-->
+                        <div class="row">
+                            <div class="col-6">
+                                <em>Max Move</em>
+                            </div>
+                            <div class="col-6">
+                                <em>Max Move Power</em>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                @move.maxMove
+                            </div>
+                            <div class="col-6">
+                                @move.maxMovePower
+                            </div>
+                        </div>
+                        <div class="smallSpacing"></div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}

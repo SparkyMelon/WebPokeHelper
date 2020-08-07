@@ -1,0 +1,481 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Pokemon Battle";
+}
+
+@section Scripts
+{
+    <script type="text/javascript" src=@Url.Content("~/js/BodyScrollLock.js")></script>
+    <script type="text/javascript" src=@Url.Content("~/js/PokemonBattleScript.js")></script>
+    <link rel="stylesheet" type="text/css" href=@Url.Content("~/css/PokemonBattleStyle.css")>
+    <script type="text/javascript">
+        var model = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+    </script>
+
+    <script type="text/javascript" src=@Url.Content("~/js/Require.js")></script>
+}
+
+<div class="container pokemonBattleContainer">
+    <div class="row">
+        @*<div class="col-1">
+            
+        </div>*@
+        <div class="col-12">
+            <div class="container">
+                @for (int x = 0; x < 2; x++)
+                {
+                <div class="row pokemonRow">
+                    @for (int y = 0; y < 2; y++)
+                    {
+                    <div class="col-3 border borderTeamColour_@(x)@(y) borderThick pokemonBorder pokemonBorder_@(x)@(y)">
+                        <div class="dropdown spacingSm">
+                            <input class="form-control dropdown-toggle pokemonDropdown marginAuto dropdownColour_@(x)@(y)" type="text" id="pokemonListText_@(x)@(y)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <div id="pokemonListDropdown_@(x)@(y)" class="dropdown-menu pokemonDropdownMenu backgroundWhite" aria-labelledby="pokemonListText">
+                                <div class="backgroundTeamColour_@(x)@(y)">
+                                    @for (int j = 0; j < Model.Count; j++)
+                                    {
+                                        <a class="dropdown-item dropdownItem_@(x)@(y)">@Model[j].name</a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container " id="pokemon_@(x)@(y)" style="background-image: url()">
+                            <div class="row rows2">
+                                <div id="pokemonImage_@(x)@(y)" class="col-4 pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                    -
+                                </div>
+                                <div class="col-5 pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                    <span class="textInTable"><b class="pokemonName" id="pokemonName_@(x)@(y)">-</b></span>
+                                </div>
+                                <div id="pokemonTypes_@(x)@(y)" class="col-3 pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                    -
+                                </div>
+                            </div>
+                            <div class="row rows2">
+                                <div class="col-11 pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix">
+                                    <span class="textInTable"><b>Level 50 w/ Perfect IVs</b></span>
+                                </div>
+                                <div class="col-1 pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                    <span class="textInTable"><img id="pokemonStatsCaret_@(x)@(y)" class="pokemonStatsCaret caretSm" src="~/Favicon/caret-bottom.svg"></span>
+                                </div>
+                            </div>
+
+
+                            <div id="pokemonStats_@(x)@(y)">
+                                <div class="row rowsMisc7">
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+
+                                    </div>
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <span class="textInTable"><b>HP</b></span>
+                                    </div>
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <span class="textInTable"><b>ATK</b></span>
+                                    </div>
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <span class="textInTable"><b>DEF</b></span>
+                                    </div>
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <span class="textInTable"><b>SP.ATK</b></span>
+                                    </div>
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <span class="textInTable"><b>SP.DEF</b></span>
+                                    </div>
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <span class="textInTable"><b>SPD</b></span>
+                                    </div>
+                                </div>
+                                @*<div class="row rowsMisc7">
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <span class="textInTable">Base</span>
+                                    </div>
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <span id="pokemonStatHP_@(x)@(y)" class="textInTable">-</span>
+                                    </div>
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <span id="pokemonStatATK_@(x)@(y)" class="textInTable">-</span>
+                                    </div>
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <span id="pokemonStatDEF_@(x)@(y)" class="textInTable">-</span>
+                                    </div>
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <span id="pokemonStatSPATK_@(x)@(y)" class="textInTable">-</span>
+                                    </div>
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <span id="pokemonStatSPDEF_@(x)@(y)" class="textInTable">-</span>
+                                    </div>
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <span id="pokemonStatSPD_@(x)@(y)" class="textInTable">-</span>
+                                    </div>
+                                </div>*@
+                                <div class="row rowsMisc7">
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        @*<span class="textInTable">Modified</span>*@
+                                    </div>
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <span id="pokemonStatHPMod_@(x)@(y)" class="textInTable">-</span>
+                                    </div>
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <span id="pokemonStatATKMod_@(x)@(y)" class="textInTable">-</span>
+                                    </div>
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <span id="pokemonStatDEFMod_@(x)@(y)" class="textInTable">-</span>
+                                    </div>
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <span id="pokemonStatSPATKMod_@(x)@(y)" class="textInTable">-</span>
+                                    </div>
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <span id="pokemonStatSPDEFMod_@(x)@(y)" class="textInTable">-</span>
+                                    </div>
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <span id="pokemonStatSPDMod_@(x)@(y)" class="textInTable">-</span>
+                                    </div>
+                                </div>
+                                <div class="row rowsMisc7">
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <span class="textInTable">EVs</span>
+                                    </div>
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <input type="checkbox" id="pokemonStatHPEV_@(x)@(y)" class="textInTable radioBoxExtra evCheckbox">
+                                    </div>
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <input type="checkbox" id="pokemonStatATKEV_@(x)@(y)" class="textInTable radioBoxExtra evCheckbox">
+                                    </div>
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <input type="checkbox" id="pokemonStatDEFEV_@(x)@(y)" class="textInTable radioBoxExtra evCheckbox">
+                                    </div>
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <input type="checkbox" id="pokemonStatSPATKEV_@(x)@(y)" class="textInTable radioBoxExtra evCheckbox">
+                                    </div>
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <input type="checkbox" id="pokemonStatSPDEFEV_@(x)@(y)" class="textInTable radioBoxExtra evCheckbox">
+                                    </div>
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <input type="checkbox" id="pokemonStatSPDEV_@(x)@(y)" class="textInTable radioBoxExtra evCheckbox">
+                                    </div>
+                                </div>
+                                <div class="row rowsMisc7">
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <span class="textInTable">Nature</span>
+                                    </div>
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        @*<input type="checkbox" id="pokemonStatHPNature_@(x)@(y)" class="textInTable radioBoxExtra natureCheckbox">*@
+                                    </div>
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <input type="checkbox" id="pokemonStatATKNature_@(x)@(y)" class="textInTable radioBoxExtra natureCheckbox">
+                                    </div>
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <input type="checkbox" id="pokemonStatDEFNature_@(x)@(y)" class="textInTable radioBoxExtra natureCheckbox">
+                                    </div>
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <input type="checkbox" id="pokemonStatSPATKNature_@(x)@(y)" class="textInTable radioBoxExtra natureCheckbox">
+                                    </div>
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <input type="checkbox" id="pokemonStatSPDEFNature_@(x)@(y)" class="textInTable radioBoxExtra natureCheckbox">
+                                    </div>
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <input type="checkbox" id="pokemonStatSPDNature_@(x)@(y)" class="textInTable radioBoxExtra natureCheckbox">
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="row rows2">
+                                <div class="col-11 pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix">
+                                    <span class="textInTable"><b>Abilities</b></span>
+                                </div>
+                                <div class="col-1 pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                    <span class="textInTable"><img id="pokemonAbilitiesCaret_@(x)@(y)" class="pokemonAbilitiesCaret caretSm" src="~/Favicon/caret-bottom.svg"></span>
+                                </div>
+                            </div>
+                            <div id="pokemonAbilities_@(x)@(y)">
+
+                            </div>
+
+
+
+                            <div class="row rows2 rowRightMovesCaretFix_@(x)@(y)">
+                                <div class="col-11 pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix">
+                                    <span class="textInTable"><b>Moves</b></span>
+                                </div>
+                                <div class="col-1 pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                    <span class="textInTable"><img id="pokemonMovesCaret_@(x)@(y)" class="pokemonMovesCaret caretSm" src="~/Favicon/caret-bottom.svg"></span>
+                                </div>
+                            </div>
+                            <div id="pokemonMovesHeaders_@(x)@(y)">
+                                <div class="row rows7">
+                                    <div class="col-4 pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <span class="textInTable"><b>Name</b></span>
+                                    </div>
+                                    <div class="col-2 pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <span class="textInTable"><b>Type</b></span>
+                                    </div>
+                                    <div class="col-2 pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <span class="textInTable"><b>Cat</b></span>
+                                    </div>
+                                    <div class="col-1 pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <span class="textInTable"><b>PP</b></span>
+                                    </div>
+                                    <div class="col-1 pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <span class="textInTable"><b>Pow</b></span>
+                                    </div>
+                                    <div class="col-1 pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <span class="textInTable"><b>Acc</b></span>
+                                    </div>
+                                    <div class="col-1 pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="pokemonMoves_@(x)@(y)" class="movesContainer">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    @if (y == 0)
+                    {
+                        <div id="middlePanel_@(x)" class="col-6 border borderDark borderThick middlePanel">
+
+                        </div>
+                    }
+                    }
+                </div>
+                }
+            </div>
+        </div>
+        @*<div class="col-1">
+            
+        </div>*@
+    </div>
+</div>
+
+<template id="pokemonImgTemplate">
+    <span class="textInTable"><img class="pokemonImg" src="~/All Pokemon Images/[ID].png" /></span>
+</template>
+
+<template id="pokemonTypeTemplate">
+    <span class="textInTable"><img class="pokemonTypeImg" src="~/Pokemon Icons/[TYPE].png" /></span>
+</template>
+
+<template id="pokemonAbilityTemplate">
+    <div class="row rows2">
+        <div class="col-3 pokemonDataColFix border borderTeamColour_xy borderFix">
+            <span class="textInTable">[ABILITY NAME]</span>
+        </div>
+        <div class="col-9 pokemonDataColFix border borderTeamColour_xy borderFix">
+            <span class="textInTable"><em>[ABILITY DESC]</em></span>
+        </div>
+    </div>
+</template>
+
+<template id="pokemonMoveTemplate">
+    <div class="move">
+        <div class="row rows7">
+            <div class="col-4 pokemonDataColFix border borderTeamColour_xy borderFix centerWrapper noLRPadding">
+                <span class="textInTable moveName">[NAME]</span>
+            </div>
+            <div class="col-2 pokemonDataColFix border borderTeamColour_xy borderFix centerWrapper noLRPadding">
+                <span class="textInTable"><img class="pokemonTypeImg" src="~/Pokemon Icons/[TYPE].png" /></span>
+            </div>
+            <div class="col-2 pokemonDataColFix border borderTeamColour_xy borderFix centerWrapper noLRPadding">
+                <span class="textInTable"><img class="pokemonTypeImg" src="~/Pokemon Icons/[CATEGORY].png" /></span>
+            </div>
+            <div class="col-1 pokemonDataColFix border borderTeamColour_xy borderFix centerWrapper noLRPadding">
+                <span class="textInTable">[PP]</span>
+            </div>
+            <div class="col-1 pokemonDataColFix border borderTeamColour_xy borderFix centerWrapper noLRPadding">
+                <span class="textInTable">[POWER]</span>
+            </div>
+            <div class="col-1 pokemonDataColFix border borderTeamColour_xy borderFix centerWrapper noLRPadding">
+                <span class="textInTable">[ACCURACY]</span>
+            </div>
+            <div class="col-1 pokemonDataColFix border borderTeamColour_xy borderFix centerWrapper noLRPadding">
+                <span class="textInTable"><img class="pokemonMoveCaret caretSm" src="~/Favicon/caret-bottom.svg"></span>
+            </div>
+        </div>
+        <div class="moveExtrasContainer">
+            <div class="row rows2">
+                <div class="col-10 pokemonDataColFix border borderTeamColour_xy borderFix centerWrapper">
+                    <span class="textInTable"><b>Effect</b></span>
+                </div>
+                <div class="col-2 pokemonDataColFix border borderTeamColour_xy borderFix centerWrapper">
+                    <span class="textInTable"><b>Rate</b></span>
+                </div>
+            </div>
+            <div class="row rows2">
+                <div class="col-10 pokemonDataColFix border borderTeamColour_xy borderFix">
+                    <span class="textInTable">[EFFECT]</span>
+                </div>
+                <div class="col-2 pokemonDataColFix border borderTeamColour_xy borderFix centerWrapper">
+                    <span class="textInTable">[EFFECT RATE]</span>
+                </div>
+            </div>
+            <div class="row rows3">
+                <div class="col-4 pokemonDataColFix border borderTeamColour_xy borderFix centerWrapper">
+                    <span class="textInTable"><b>Crit Rate</b></span>
+                </div>
+                <div class="col-4 pokemonDataColFix border borderTeamColour_xy borderFix centerWrapper">
+                    <span class="textInTable"><b>Priority</b></span>
+                </div>
+                <div class="col-4 pokemonDataColFix border borderTeamColour_xy borderFix centerWrapper">
+                    <span class="textInTable"><b>Target</b></span>
+                </div>
+            </div>
+            <div class="row rows3">
+                <div class="col-4 pokemonDataColFix border borderTeamColour_xy borderFix centerWrapper">
+                    <span class="textInTable">[CRIT RATE]</span>
+                </div>
+                <div class="col-4 pokemonDataColFix border borderTeamColour_xy borderFix centerWrapper">
+                    <span class="textInTable">[PRIORITY]</span>
+                </div>
+                <div class="col-4 pokemonDataColFix border borderTeamColour_xy borderFix centerWrapper">
+                    <span class="textInTable">[TARGET]</span>
+                </div>
+            </div>
+            <div class="row rows2">
+                <div class="col-9 pokemonDataColFix border borderTeamColour_xy borderFix centerWrapper">
+                    <span class="textInTable"><b>Max Move</b></span>
+                </div>
+                <div class="col-3 pokemonDataColFix border borderTeamColour_xy borderFix centerWrapper">
+                    <span class="textInTable"><b>Power</b></span>
+                </div>
+            </div>
+            <div class="row rows2">
+                <div class="col-9 pokemonDataColFix border borderTeamColour_xy borderFix centerWrapper">
+                    <span class="textInTable">[MAX MOVE]</span>
+                </div>
+                <div class="col-3 pokemonDataColFix border borderTeamColour_xy borderFix centerWrapper">
+                    <span class="textInTable">[MAX MOVE POWER]</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template id="topMiddlePanelTemplate">
+    <div class="row">
+        <div class="col-5 border borderDark borderThick rounded halfPanelL">
+            <div class="row noLRMargin centerWrapper">
+                <div class="">
+                    <span class="textInTable"><b>Lorem Ipsum</b></span>
+                </div>
+            </div>
+            <div id="topPanelText" class="row noLRMargin">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ultricies est sed massa consectetur, vehicula condimentum justo dignissim. Cras at blandit augue. Cras imperdiet luctus feugiat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut aliquet sapien sit amet finibus fermentum. Duis libero felis, laoreet quis imperdiet eu, vehicula in tellus. Nullam euismod arcu in turpis elementum volutpat. Praesent ut facilisis eros, vitae semper ante.
+            </div>
+        </div>
+        <div class="col-2"></div>
+        <div class="col-5 noLRPadding">
+            <div class="border borderDark borderThick rounded halfPanelR">
+                <div class="row noLRMargin">
+                    <div class="col-12 centerWrapper"><span class="textInTable"><b>Expand/Collapse All</b></span></div>
+                </div>
+                <div class="row noLRMargin">
+                    <div class="col-3 centerWrapper noLRPadding">Stats</div>
+                    <div class="col-3 centerWrapper noLRPadding">Abilities</div>
+                    <div class="col-3 centerWrapper noLRPadding">Moves</div>
+                    <div class="col-3 centerWrapper noLRPadding">Extra Move Info</div>
+                </div>
+                <div class="row noLRMargin spacingBotSm">
+                    <div class="col-3 centerWrapper noLRPadding">
+                        <div class="btn-group" role="group" aria-label="Stats Toggle">
+                            <button id="statsExpMasterBtn" type="button" class="btn expColBtn"><img class="caretMd" src="~/Favicon/caret-bottom.svg"></button>
+                            <button id="statsColMasterBtn" type="button" class="btn expColBtn"><img class="caretMd" src="~/Favicon/caret-top.svg"></button>
+                        </div>
+                    </div>
+                    <div class="col-3 centerWrapper noLRPadding">
+                        <div class="btn-group" role="group" aria-label="Stats Toggle">
+                            <button id="abilitiesExpMasterBtn" type="button" class="btn expColBtn"><img class="caretMd" src="~/Favicon/caret-bottom.svg"></button>
+                            <button id="abilitiesColMasterBtn" type="button" class="btn expColBtn"><img class="caretMd" src="~/Favicon/caret-top.svg"></button>
+                        </div>
+                    </div>
+                    <div class="col-3 centerWrapper noLRPadding">
+                        <div class="btn-group" role="group" aria-label="Stats Toggle">
+                            <button id="movesExpMasterBtn" type="button" class="btn expColBtn"><img class="caretMd" src="~/Favicon/caret-bottom.svg"></button>
+                            <button id="movesColMasterBtn" type="button" class="btn expColBtn"><img class="caretMd" src="~/Favicon/caret-top.svg"></button>
+                        </div>
+                    </div>
+                    <div class="col-3 centerWrapper noLRPadding">
+                        <div class="btn-group" role="group" aria-label="Stats Toggle">
+                            <button id="extraMoveExpMasterBtn" type="button" class="btn expColBtn disabled"><img class="caretMd" src="~/Favicon/caret-bottom.svg"></button>
+                            <button id="extraMoveColMasterBtn" type="button" class="btn expColBtn"><img class="caretMd" src="~/Favicon/caret-top.svg"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border borderDark borderThick rounded halfPanelR">
+                <div class="row noLRMargin">
+                    <div class="col-12 centerWrapper"><span class="textInTable"><b>Turn Order</b></span></div>
+                </div>
+                <div class="row noLRMargin">
+                    <div class="col-3 centerWrapper noLRPadding">1st</div>
+                    <div class="col-3 centerWrapper noLRPadding">2nd</div>
+                    <div class="col-3 centerWrapper noLRPadding">3rd</div>
+                    <div class="col-3 centerWrapper noLRPadding">4th</div>
+                </div>
+                <div class="row noLRMargin">
+                    <div class="col-3 centerWrapper noLRPadding">
+                        <div id="turnOrder0" class="turnOrderImgBox centerWrapper">
+
+                        </div>
+                    </div>
+                    <div class="col-3 centerWrapper noLRPadding">
+                        <div id="turnOrder1" class="turnOrderImgBox centerWrapper">
+
+                        </div>
+                    </div>
+                    <div class="col-3 centerWrapper noLRPadding">
+                        <div id="turnOrder2" class="turnOrderImgBox centerWrapper">
+
+                        </div>
+                    </div>
+                    <div class="col-3 centerWrapper noLRPadding">
+                        <div id="turnOrder3" class="turnOrderImgBox centerWrapper">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 border borderDark borderThick rounded fullPanel">
+            <div class="row noLRMargin centerWrapper">
+                <div class="">
+                    <span class="textInTable"><b>Attack Simulator</b></span>
+                </div>
+            </div>
+            <div class="row noLRMargin spacingTopSm">
+                <div class="col-2 centerWrapper noPaddingRight">
+                    <button id="attackSimBtn" class="btn btn-light btnMiddlePanel" type="button">Attack</button>
+                </div>
+                <div class="col-10 centerWrapper noPaddingLeft">
+                    <div id="attackSimTxt" class="form-control">
+                        Press the attack button to start
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</template>
+
+<template id="bottomMiddlePanelTemplate">
+    <span class="textInTable"><img class="pokemonImg" src="~/All Pokemon Images/[ID].png" /></span>
+</template>
+
+<!--Use this in the js file!!!!-->
+<template id="attackSimResultTemplate">
+    <span class="[ATTACKER_COLOUR_CLASS]">[ATTACKER_NAME]'s [MOVE]</span> does
+    <b>[MIN_DAMAGE]% - [MAX_DAMAGE]%</b> damage to
+    <span class="[DEFENDER_COLOUR_CLASS]">[DEFENDER_NAME]</span> with an accuracy of <b>[ACCURACY]%</b> and a
+    <b>[CRIT_RATE]%</b> chance to crit for
+    <b>[MIN_DAMAGE_CRIT]% - [MAX_DAMAGE_CRIT]%</b> damage.
+    <br>
+    <span class="[ATTACKER_COLOUR_CLASS]">[MOVE]'s</span> effect is [MOVE_EFFECT] with a rate of
+    <b>[MOVE_EFFECT_RATE]%</b>.
+</template>

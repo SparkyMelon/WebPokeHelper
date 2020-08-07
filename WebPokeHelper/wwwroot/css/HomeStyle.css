@@ -1,0 +1,18 @@
+﻿.centerWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dataSpacing {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+#pokemonBattleBtn {
+
+}
+
+#viewDataBtn {
+
+}

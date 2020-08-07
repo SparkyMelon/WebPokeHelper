@@ -1,0 +1,25 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Pokemon Information";
+}
+
+@section Scripts
+{
+    <link rel="stylesheet" type="text/css" href=@Url.Content("~/css/HomeStyle.css")>
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 centerWrapper">
+            <button id="pokemonBattleBtn" type="button" class="btn btn-success" onclick="window.location = '@Url.Action("Index","PokemonBattle")'"><h2><b>Pokemon Battle!</b></h2></button>
+        </div>
+    </div>
+    <div class="dataSpacing"></div>
+    <div class="row">
+        <div class="col-12 centerWrapper">
+            <button id="viewDataBtn" type="button" class="btn btn-info" onclick="window.location = '@Url.Action("Index","PokemonData")'">View Pokemon Data</button>
+        </div>
+    </div>
+</div>
