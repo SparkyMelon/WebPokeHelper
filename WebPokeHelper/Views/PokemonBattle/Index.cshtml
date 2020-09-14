@@ -88,28 +88,28 @@
                                     </div>
                                 </div>
                                 @*<div class="row rowsMisc7">
-                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
-                                        <span class="textInTable">Base</span>
-                                    </div>
-                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
-                                        <span id="pokemonStatHP_@(x)@(y)" class="textInTable">-</span>
-                                    </div>
-                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
-                                        <span id="pokemonStatATK_@(x)@(y)" class="textInTable">-</span>
-                                    </div>
-                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
-                                        <span id="pokemonStatDEF_@(x)@(y)" class="textInTable">-</span>
-                                    </div>
-                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
-                                        <span id="pokemonStatSPATK_@(x)@(y)" class="textInTable">-</span>
-                                    </div>
-                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
-                                        <span id="pokemonStatSPDEF_@(x)@(y)" class="textInTable">-</span>
-                                    </div>
-                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
-                                        <span id="pokemonStatSPD_@(x)@(y)" class="textInTable">-</span>
-                                    </div>
-                                </div>*@
+            <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                <span class="textInTable">Base</span>
+            </div>
+            <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                <span id="pokemonStatHP_@(x)@(y)" class="textInTable">-</span>
+            </div>
+            <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                <span id="pokemonStatATK_@(x)@(y)" class="textInTable">-</span>
+            </div>
+            <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                <span id="pokemonStatDEF_@(x)@(y)" class="textInTable">-</span>
+            </div>
+            <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                <span id="pokemonStatSPATK_@(x)@(y)" class="textInTable">-</span>
+            </div>
+            <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                <span id="pokemonStatSPDEF_@(x)@(y)" class="textInTable">-</span>
+            </div>
+            <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                <span id="pokemonStatSPD_@(x)@(y)" class="textInTable">-</span>
+            </div>
+        </div>*@
                                 <div class="row rowsMisc7">
                                     <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
                                         @*<span class="textInTable">Modified</span>*@
@@ -179,6 +179,41 @@
                                         <input type="checkbox" id="pokemonStatSPDNature_@(x)@(y)" class="textInTable radioBoxExtra natureCheckbox">
                                     </div>
                                 </div>
+
+                                <div class="row rowsMisc7">
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <span class="textInTable">Modifier</span>
+                                    </div>
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        
+                                    </div>
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <span class="textInTable"><img id="pokemonAtkModMinus_@(x)@(y)" class="caretSmm" src="~/Favicon/minus.svg"></span>
+                                        <span class="textInTable spacingLRSm" id="pokemonAtkMod">0</span>
+                                        <span class="textInTable"><img id="pokemonAtkModPlus_@(x)@(y)" class="caretSmm" src="~/Favicon/plus.svg"></span>
+                                    </div>
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <span class="textInTable"><img id="pokemonDefModMinus_@(x)@(y)" class="caretSmm" src="~/Favicon/minus.svg"></span>
+                                        <span class="textInTable spacingLRSm" id="pokemonDefMod">0</span>
+                                        <span class="textInTable"><img id="pokemonDefModPlus_@(x)@(y)" class="caretSmm" src="~/Favicon/plus.svg"></span>
+                                    </div>
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <span class="textInTable"><img id="pokemonSpAtkModMinus_@(x)@(y)" class="caretSmm" src="~/Favicon/minus.svg"></span>
+                                        <span class="textInTable spacingLRSm" id="pokemonSpAtkMod">0</span>
+                                        <span class="textInTable"><img id="pokemonSpAtkModPlus_@(x)@(y)" class="caretSmm" src="~/Favicon/plus.svg"></span>
+                                    </div>
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <span class="textInTable"><img id="pokemonSpDefModMinus_@(x)@(y)" class="caretSmm" src="~/Favicon/minus.svg"></span>
+                                        <span class="textInTable spacingLRSm" id="pokemonSpDefMod">0</span>
+                                        <span class="textInTable"><img id="pokemonSpDefModPlus_@(x)@(y)" class="caretSmm" src="~/Favicon/plus.svg"></span>
+                                    </div>
+                                    <div class="col pokemonDataColFix border borderTeamColour_@(x)@(y) borderFix centerWrapper noLRPadding">
+                                        <span class="textInTable"><img id="pokemonSpdModMinus_@(x)@(y)" class="caretSmm" src="~/Favicon/minus.svg"></span>
+                                        <span class="textInTable spacingLRSm" id="pokemonSpdMod">0</span>
+                                        <span class="textInTable"><img id="pokemonSpdModPlus_@(x)@(y)" class="caretSmm" src="~/Favicon/plus.svg"></span>
+                                    </div>
+                                </div>
+
                             </div>
 
 
@@ -360,12 +395,48 @@
         <div class="col-5 border borderDark borderThick rounded halfPanelL">
             <div class="row noLRMargin centerWrapper">
                 <div class="">
-                    <span class="textInTable"><b>Lorem Ipsum</b></span>
+                    <span class="textInTable"><b>Weather</b></span>
                 </div>
             </div>
-            <div id="topPanelText" class="row noLRMargin">
+            @*<div id="topPanelText" class="row noLRMargin">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ultricies est sed massa consectetur, vehicula condimentum justo dignissim. Cras at blandit augue. Cras imperdiet luctus feugiat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut aliquet sapien sit amet finibus fermentum. Duis libero felis, laoreet quis imperdiet eu, vehicula in tellus. Nullam euismod arcu in turpis elementum volutpat. Praesent ut facilisis eros, vitae semper ante.
+            </div>*@
+
+            <div class="row">
+                <div class="col-6 centerWrapper">
+                    <span class="textInTable">Sunshine</span>
+                    
+                </div>
+                <div class="col-6 centerWrapper">
+                    <span class="textInTable">Rain</span>
+                    
+                </div>
             </div>
+            <div class="row">
+                <div class="col-6 centerWrapper weatherCBHeight">
+                    <input type="checkbox" id="weatherCheckBoxSunshine" />
+                </div>
+                <div class="col-6 centerWrapper weatherCBHeight">
+                    <input type="checkbox" id="weatherCheckBoxRain" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 centerWrapper">
+                    <span class="textInTable">Hail</span>
+                </div>
+                <div class="col-6 centerWrapper">
+                    <span class="textInTable">Sandstorm</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 centerWrapper weatherCBHeight">
+                    <input type="checkbox" id="weatherCheckBoxHail" />
+                </div>
+                <div class="col-6 centerWrapper weatherCBHeight">
+                    <input type="checkbox" id="weatherCheckBoxSandstorm" />
+                </div>
+            </div>
+
         </div>
         <div class="col-2"></div>
         <div class="col-5 noLRPadding">
@@ -468,7 +539,6 @@
     <span class="textInTable"><img class="pokemonImg" src="~/All Pokemon Images/[ID].png" /></span>
 </template>
 
-<!--Use this in the js file!!!!-->
 <template id="attackSimResultTemplate">
     <span class="[ATTACKER_COLOUR_CLASS]">[ATTACKER_NAME]'s [MOVE]</span> does
     <b>[MIN_DAMAGE]% - [MAX_DAMAGE]%</b> damage to

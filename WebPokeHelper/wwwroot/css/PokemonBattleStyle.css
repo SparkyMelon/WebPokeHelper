@@ -20,6 +20,10 @@
     width: 15px;
 }
 
+.caretSmm {
+    width: 17px;
+}
+
 .caretMd {
     width: 15px;
     margin-top: -7px;
@@ -392,4 +396,13 @@
 .noPaddingLeft {
     padding-left: 0px;
     margin-left: -0.5px;
+}
+
+.spacingLRSm {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.weatherCBHeight {
+    height: 70px;
 }

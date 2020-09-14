@@ -1,7 +1,4 @@
 ﻿var pokemonInBattle = [{ code: "00", data: null }, { code: "10", data: null }, { code: "01", data: null }, { code: "11", data: null }];
-//var attackSimMove = null;
-//var attackSimMoveId = null;
-//var attackSimDefenderId = null;
 
 $(document).ready(function () {
     InitializeEvents();
@@ -260,6 +257,19 @@ function InitializeEvents() {
             });
         });
     });
+
+    //Weather checkboxes
+    $("#weatherCheckBoxSunshine, #weatherCheckBoxRain, #weatherCheckBoxHail, #weatherCheckBoxSandstorm").change(function () {
+        var checkboxes = [$("#weatherCheckBoxSunshine"), $("#weatherCheckBoxRain"), $("#weatherCheckBoxHail"), $("#weatherCheckBoxSandstorm")];
+
+        if ($(this).is(":checked")) {
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].prop("id") != $(this).prop("id")) {
+                    checkboxes[i].prop("checked", false)
+                }
+            }
+        }
+    });
 }
 
 function CaretToggle($caret, $container) {
@@ -444,10 +454,6 @@ function GetMoveEffectiveness(defender, move) {
 }
 
 function AttackSimulation(attackerId, moveName, defenderId) {
-    //var result = "<span class=\"[ATTACKER_COLOUR_CLASS]\">[ATTACKER_NAME]'s [MOVE]</span> does <b>[MIN_DAMAGE]% - [MAX_DAMAGE]%</b> damage " +
-    //    "to <span class=\"[DEFENDER_COLOUR_CLASS]\">[DEFENDER_NAME]</span> with a <b>[CRIT_RATE]%</b> chance to crit for <b>[MIN_DAMAGE_CRIT]% - [MAX_DAMAGE_CRIT]%</b> damage." +
-    //    "</br>" +
-    //    "<span class=\"[ATTACKER_COLOUR_CLASS]\">[MOVE]'s</span> effect is [MOVE_EFFECT] with a rate of <b>[MOVE_EFFECT_RATE]</b>.";
     var result = $("#attackSimResultTemplate").html();
     var attacker = GetPokemonInBattle(attackerId);
     var defender = GetPokemonInBattle(defenderId);
@@ -509,8 +515,8 @@ function AttackSimulation(attackerId, moveName, defenderId) {
 
     result = result.replace("[MIN_DAMAGE]", minDamagePercent);
     result = result.replace("[MAX_DAMAGE]", maxDamagePercent);
-    result = result.replace("[MIN_DAMAGE_CRIT]", Math.trunc(minDamagePercent * 1.5));
-    result = result.replace("[MAX_DAMAGE_CRIT]", Math.trunc(maxDamagePercent * 1.5));
+    result = result.replace("[MIN_DAMAGE_CRIT]", Math.trunc(minDamagePercent * crit));
+    result = result.replace("[MAX_DAMAGE_CRIT]", Math.trunc(maxDamagePercent * crit));
 
     result = result.replace("[MOVE_EFFECT]", move.secondaryEffect);
     result = result.replace("[MOVE_EFFECT_RATE]", move.effectRate);
